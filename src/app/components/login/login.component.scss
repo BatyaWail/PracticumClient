@@ -1,0 +1,31 @@
+.example-container mat-form-field+mat-form-field {
+    margin-left: 8px;
+}
+
+.example-right-align {
+    text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+}
+// Display content in a column
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    h1{
+        // Adjust margin-bottom:
+        margin-bottom: 1rem;
+    }
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 100vh;
+    margin: auto;
+    margin-top: 20vh;
+
+}

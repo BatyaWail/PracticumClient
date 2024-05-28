@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>you have errors in the form!!</h2>
+<mat-dialog-content>
+  your errors is:
+  <ul *ngFor="let data of data.errors">
+    <li>error: {{data}} </li>
+  </ul>
+</mat-dialog-content>

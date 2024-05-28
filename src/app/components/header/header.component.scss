@@ -1,0 +1,27 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-toolbar {
+  height: 10vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; 
+}
+mat-toolbar {
+  height: 10vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+mat-toolbar .example-spacer {
+  flex: 1 1 auto;
+}
+:host {
+  display: block;
+  padding-top: 10vh; 
+  padding-bottom: 0vh;
+}
+:host.scrolled {
+  padding-top: 12vh; 
+}

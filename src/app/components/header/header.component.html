@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button matTooltip="Home" class="example-icon" aria-label="Log Out button" (click)="home()">
+    <mat-icon>home</mat-icon>
+  </button>
+  <span>Employee Management Hub</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button matTooltip="About Us" class="example-icon favorite-icon" aria-label="About Us button"
+    (click)="aboutUs()">
+    <mat-icon>info</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Add Employee" class="example-icon" aria-label="Add Employee button"
+    (click)="addEmployee()">
+    <mat-icon>person_add</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Employee List" class="example-icon favorite-icon"
+    aria-label="Employee List button" (click)="employeeList()">
+    <mat-icon>list</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Login" class="example-icon" aria-label="Login button" (click)="login()">
+    <mat-icon>login</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Log Out" class="example-icon" aria-label="Log Out button" (click)="logOut()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+  <button mat-flat-button color="warn" aria-label="yourCompany" (click)="foundCompanyNameFromToken()" matTooltip="click to see your company">
+    {{companyName}}
+    <mat-icon>business</mat-icon>
+  </button>
+</mat-toolbar>

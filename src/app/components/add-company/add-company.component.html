@@ -1,0 +1,28 @@
+<!-- <div>To add a new company - enter the name of the company and an email address so that we can send you the password chosen for you there</div> -->
+<form [formGroup]="this.addCompanyForm" (ngSubmit)="add()" class="wrapper">
+    <mat-form-field>
+        <mat-label>Company Name</mat-label>
+        <input matInput type="text" formControlName="name">
+        <mat-error *ngIf="addCompanyForm.get('name')?.hasError('required')">The field is required!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Enter Your Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="addCompanyForm.get('password')?.hasError('required')">The field is required!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword">
+        <mat-error *ngIf="addCompanyForm.hasError('passwordMismatch')">Passwords do not match!</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" matTooltip="click to send">
+        Send
+        <mat-icon>send</mat-icon>
+    </button>
+
+</form>

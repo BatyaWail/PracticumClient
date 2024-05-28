@@ -1,0 +1,34 @@
+.fill-remaining-space {
+    flex-grow: 1;
+}
+:host {
+    display: block;
+    padding-bottom: 15vh;
+}
+.contact-info a {
+    color: white; /* קישורים לבנים */
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white; /* Text color */
+    text-align: center; /* Center-align the text */
+}
+.footer-content {
+    display: flex;
+    justify-content: center; /* Center-align the content horizontally */
+    align-items: center; /* Center-align the content vertically */
+    font-size: 2.5vh;
+    // text-align: center;
+}
+.footer-content span {
+    margin: 0 1vh; /* Add margin to space out the items */
+}
+.contact-info {
+    display: flex;
+    align-items: center;
+}
+.contact-info .contact {
+    margin-right: 1vh; /* Add margin to space out the items */
+}

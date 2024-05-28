@@ -1,0 +1,99 @@
+.content {
+  width: 80%;
+  /* Adjust width as needed */
+  height: 80%;
+  /* Adjust height as needed */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero {
+  width: 100%;
+  /* Match content width */
+}
+
+.hero img {
+  width: 100%;
+  /* Stretch image to fit card */
+  object-fit: unset
+    /* Maintain aspect ratio */
+}
+
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.section {
+  flex: 1 1 40%;
+  /* Responsive sizing for sections */
+  margin: 1rem;
+  padding: 1rem;
+  text-align: left;
+  /* Align text to left */
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  padding: 25vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 80%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+}
+
+.content {
+  flex: 1 1 auto;
+  /* Grow content to fill available space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+
+  /* Adjust layout for smaller screens */
+  .content {
+    flex-direction: column;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.mask {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 85vh
+}

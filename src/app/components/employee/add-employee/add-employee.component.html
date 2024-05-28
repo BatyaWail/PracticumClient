@@ -1,0 +1,193 @@
+<div class="container">
+  <div class="form-wrapper">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          Add Employee
+          <mat-icon color="primary">person_add</mat-icon>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="employeeForm">
+
+          <mat-accordion class="example-headers-align" multi>
+            <!-- Personal data panel -->
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Personal data
+                </mat-panel-title>
+                <mat-panel-description>
+                  Enter your identity, full name, birthdate and gender
+                  <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <!-- Identity -->
+              <div style="display: grid; grid-template-columns: 1fr; grid-gap: 10px;">
+                <mat-form-field>
+                  <mat-label>Identity</mat-label>
+                  <input matInput formControlName="identity" placeholder="Enter identity" type="text">
+                  <mat-error *ngIf="this.employeeForm.get('identity')?.hasError('required')">the field is
+                    required!</mat-error>
+                  <mat-error *ngIf="this.employeeForm.get('identity')?.hasError('minlength')">
+                    the identity must be at least 9 characters
+                  </mat-error>
+                  <mat-error *ngIf="this.employeeForm.get('identity')?.hasError('maxlength')">
+                    the identity must be at most 9 characters
+                  </mat-error>
+                  <mat-error
+                    *ngIf="this.employeeForm.get('identity')?.hasError('invalidIdentityFormat')&&!employeeForm.get('identity')?.hasError('minlength')&&!employeeForm.get('identity')?.hasError('maxlength')&&!employeeForm.get('identity')?.hasError('required')">Invalid
+                    identity
+                    format</mat-error>
+
+                </mat-form-field>
+                <div style="display: grid; grid-template-columns: auto auto;">
+
+                  <mat-form-field style="margin-right: 2vh; ">
+                    <mat-label>First name</mat-label>
+                    <input matInput formControlName="firstName" placeholder="Enter first name" type="text">
+                    <mat-error *ngIf="this.employeeForm.get('firstName')?.hasError('required')">the field is
+                      required!</mat-error>
+                  </mat-form-field>
+
+                  <!-- Last Name -->
+                  <mat-form-field>
+                    <mat-label>Last name</mat-label>
+                    <input matInput formControlName="lastName" placeholder="Enter last name" type="text">
+                    <mat-error *ngIf="this.employeeForm.get('lastName')?.hasError('required')">the field is
+                      required!</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Date of Birth -->
+                <mat-form-field>
+                  <mat-label>Date of Birth</mat-label>
+                  <input matInput [matDatepicker]="birthdatePicker" formControlName="dateOfBirth"
+                    placeholder="Choose your birthdate" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #birthdatePicker></mat-datepicker>
+                  <mat-error *ngIf="this.employeeForm.get('dateOfBirth')?.hasError('required')">the field is
+                    required!</mat-error>
+                  <mat-error *ngIf="employeeForm.get('dateOfBirth')?.hasError('invalidDateOfBirth')">The date is
+                    The birth date must be at least before 18 years!
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field style="width: 100%;">
+                  <mat-label>Gender</mat-label>
+                  <mat-select formControlName="maleOrFmale" placeholder="Select your gender">
+                    <mat-option value="male">Male</mat-option>
+                    <mat-option value="fmale">Female</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="this.employeeForm.get('maleOrFmale')?.hasError('required')">the field is
+                    required!</mat-error>
+
+                </mat-form-field>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  employment data
+                </mat-panel-title>
+                <mat-panel-description>
+                  enter start date working and Choose your roles
+                  <mat-icon>work</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="Choose a date"
+                  readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="employeeForm.get('startDate')?.hasError('required')">the field is
+                  required!</mat-error>
+                <mat-error *ngIf="employeeForm.get('startDate')?.hasError('futureDate')">
+                  Start Date cannot be in the future
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('startDate')?.hasError('underAge')">
+                  Age must be at least 18 years
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Role selection form fields -->
+              <div formArrayName="employeeRoles"> <!-- FormArrayName directive -->
+
+                <div *ngFor="let roleGroup of employeeRolesFormArray.controls; let i = index" class="role-selection">
+                  <mat-expansion-panel >
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        role {{i+1}}
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Enter role name, if it's a management role and entry date
+                        <mat-icon>assignment</mat-icon>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div [formGroupName]="i" style="display: grid; grid-template-columns: auto auto auto;">
+                      <!-- FormGroupName directive -->
+                      <mat-form-field>
+                        <mat-label>Select Role</mat-label>
+                        <mat-select placeholder="Choose a role" formControlName="roleId">
+                          <mat-option *ngFor="let role of filteredRoles(i)" [value]="role.roleId">{{ role.roleName
+                            }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roleGroup.get('roleName')?.hasError('required')">The field is
+                          required!</mat-error>
+                      </mat-form-field>
+                      <div style="margin: auto;">
+                        <mat-slide-toggle formControlName="isManagementRole"
+                          class="example-margin" color="primary">Management?</mat-slide-toggle>
+                      </div>
+                      <mat-form-field>
+                        <mat-label>Entry Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="entryDate"
+                          placeholder="Choose entry date" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="roleGroup.get('entryDate')?.hasError('required')">The field is
+                          required!</mat-error>
+                        <mat-error *ngIf="roleGroup.get('entryDate')?.hasError('startDateBeforeEntryDate')">Entry date
+                          must be
+                          after start date</mat-error>
+                      </mat-form-field>
+
+                      <!-- Remove Role button -->
+                      <button mat-icon-button color="warn" (click)="removeRole(i)" matTooltip="click to remove role">
+                        <mat-icon>remove_circle</mat-icon>
+                      </button>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+
+                <mat-error *ngIf="employeeForm.get('employeeRoles')?.hasError('roleNameNotDuplicate')">Duplicate roles
+                  are not allowed"></mat-error>
+              </div>
+
+
+              <button mat-button color="primary" (click)="addRole()" [disabled]="this.isRolesListEmpty===true" matTooltip="click to add role">
+                Add Role
+                <mat-icon>add</mat-icon>
+              </button>
+
+
+
+            </mat-expansion-panel>
+
+            <!-- Previous and submit buttons -->
+            <mat-action-row>
+              <button mat-button color="warn" (click)="reset()" matTooltip="click to go reset">
+                Reset
+                <mat-icon>cancel</mat-icon>
+              </button>
+              <button mat-button color="primary" (click)="submit()" matTooltip="click to submit">
+                Submit
+                <mat-icon>save</mat-icon>
+              </button>
+            </mat-action-row>
+          </mat-accordion>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

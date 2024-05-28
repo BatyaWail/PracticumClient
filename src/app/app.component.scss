@@ -1,0 +1,10 @@
+app-header {
+    z-index: 1;
+    /* Ensure content has a higher z-index if needed */
+    /* Adjust margins/padding as necessary */
+}
+
+router-outlet {
+    min-height: calc(100vh - 50vh); /* Set a minimum height */
+    /* Set a minimum height */
+}

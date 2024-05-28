@@ -1,0 +1,22 @@
+
+<h2 mat-dialog-title>
+    {{data.title}}
+    <mat-icon color="warn">{{data.icon}}</mat-icon>
+</h2>
+<mat-dialog-content>
+  <div>{{data.messege}}
+</div>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="data.isCancelButon===true">
+  <button mat-button (click)="onNoClick()" matTooltip="click to cancel" color="warn">
+    Cancel
+    <mat-icon>cancel</mat-icon></button>
+  <button mat-button  cdkFocusInitial (click)="onYesClick()" matTooltip="click to ok" color="primary">
+    Ok<mat-icon>done</mat-icon>
+  </button>
+</mat-dialog-actions>
+<mat-dialog-actions *ngIf="data.isCancelButon!==true" >
+  <button mat-button  cdkFocusInitial (click)="onYesClick()" matTooltip="click to ok" color="primary">
+    Ok<mat-icon>done</mat-icon>
+  </button>
+  </mat-dialog-actions>
